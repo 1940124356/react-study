@@ -1,0 +1,27 @@
+.App{
+    text-align: center;
+    &>h1{
+        color: red;
+    }
+}
+.color{
+    color: green;
+}
+.blue{
+    color:blue;
+}
+.language{
+    display:flex;
+    margin-bottom: 50px;
+    &>span{
+        flex:1;
+        line-height: 40px;
+        text-align: center;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+    &>span.on{
+        background: coral;
+        color: #fff;
+    }
+}

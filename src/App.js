@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.min.css';
+
+import TestJsx from './views/TestJsx'
+
+import TestProps from './views/TestProps'
+import TestEvent from './views/TestEvent'
+import TestLanguage from './views/TestLanguage';
+import TestCondition from './views/TestCondition'
+import TestList from './views/TestList'
+import TestForm from './views/TestForm'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>hello React</h1>
+      <TestJsx></TestJsx>
+      <TestProps></TestProps>
+      <TestEvent></TestEvent>
+      <TestLanguage></TestLanguage>
+      <TestCondition></TestCondition>
+      <TestList></TestList>
+      <TestForm></TestForm>
     </div>
   );
 }
