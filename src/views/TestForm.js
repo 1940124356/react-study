@@ -12,7 +12,8 @@ export default class TestForm extends React.Component{
                 myPass:'',
                 myPhone:'',
                 myFav:'1',
-                myAgree:false
+                myAgree:false,
+                myGender:'1'
             }
         }
     }
@@ -37,6 +38,7 @@ export default class TestForm extends React.Component{
 
     // ----------------------------------------------------------------
     myChange(k,e){
+        console.log(e.target.value)
         let { info }= this.state
         if(k=== 'myAgree'){
             info[k] = e.target.checked
@@ -84,6 +86,11 @@ export default class TestForm extends React.Component{
                     <option value="3">读书</option>
                     <option value="4">游戏</option>
                 </select>
+                <div>
+                    <span>性别</span>
+                    <input name='gender' value='1' checked={info.myGender==='1'} onChange={this.myChange.bind(this,'myGender')} type="radio"/><span>男</span>
+                    <input name='gender' value='2' checked={info.myGender==='2'} onChange={this.myChange.bind(this,'myGender')} type="radio"/><span>女</span>
+                </div>
                 <div>
                     <input checked={info.myAgree} onChange={this.myChange.bind(this,'myAgree')} type="checkbox"/>
                     <span>你是否同意该协议</span>
