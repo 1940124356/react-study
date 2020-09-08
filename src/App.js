@@ -9,6 +9,7 @@ import TestLanguage from './views/TestLanguage';
 import TestCondition from './views/TestCondition'
 import TestList from './views/TestList'
 import TestForm from './views/TestForm'
+import TestLife from './views/TestLife'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <TestCondition></TestCondition>
       <TestList></TestList>
       <TestForm></TestForm>
+      <TestLife></TestLife>
     </div>
   );
 }
