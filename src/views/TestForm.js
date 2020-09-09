@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Checkbox,Radio } from '../components/'
+
 export default class TestForm extends React.Component{
     constructor(props){
         super(props)
@@ -14,7 +16,23 @@ export default class TestForm extends React.Component{
                 myFav:'1',
                 myAgree:false,
                 myGender:'1'
-            }
+            },
+            favArr:[
+                {id:1,name:'读书'},
+                {id:2,name:'音乐'},
+                {id:3,name:'游戏'},
+                {id:4,name:'编程'},
+                {id:5,name:'吃喝'}
+            ],
+            favs:[1,2,5],
+            eduArr:[
+                {id:1,name:'博士'},
+                {id:2,name:'硕士'},
+                {id:3,name:'本科'},
+                {id:4,name:'大专'},
+                {id:5,name:'高中'},
+            ],
+            edu:3
         }
     }
     //提交表单
@@ -22,7 +40,8 @@ export default class TestForm extends React.Component{
         let data = {
             name:this.state.name,
             fav:this.state.fav,
-            src:this.state.src
+            src:this.state.src,
+
         }
         console.log('提交成功',data)
     }
@@ -49,10 +68,17 @@ export default class TestForm extends React.Component{
         this.setState({info:info})
     }
     submit2(){
-        console.log('data',this.state.info)
+        console.log('data',this.state.info,this.state.favArr)
+    }
+    favChanges(val){
+        this.setState({favs:val})
+    }
+    eduChange(val){
+        console.log(val)
+        this.setState({edu:parseInt(val)})
     }
     render(){
-        let { name,fav,info }=this.state
+        let { name,fav,info,favArr,favs,eduArr,edu }=this.state
         return(
             <div>
                 <h1>测试表单</h1>
@@ -96,6 +122,8 @@ export default class TestForm extends React.Component{
                     <span>你是否同意该协议</span>
                 </div>
                 <button onClick={this.submit2.bind(this)}></button>
+                <Checkbox value={favs} options={favArr} onChange={this.favChanges.bind(this)}></Checkbox>
+                <Radio value={edu} options={eduArr} onChange={this.eduChange.bind(this)}></Radio>
             </div>
         )
     }

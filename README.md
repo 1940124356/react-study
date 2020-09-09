@@ -148,3 +148,81 @@
     ```
     <input type="file"/>
     ```
+# 状态提升
+    状态提升，实际上解决是组件之间的数据通信问题
+    状态是最原始的数据共享解决方案，在react 延生还没有成熟的状态管理工具。
+
+    prop-types组件的props类型检查
+    ```
+        cnpm install prop-types -S
+
+        import PropTypes from 'prop-types'
+
+        class XX extends React.Component {}
+
+        Xx. propTypes = {
+            msg: PropTypes.string.isRequired, 
+            onChange: PropTypes.func.isRequired
+        }
+    ```
+# 组合
+    在react实践开发，官方建议使用组合进行组件复用，而不是继承
+    props是父子组件之间沟通纽带
+    在组合实现组件复用时，props传递的是jsx对象或者是自定义组件
+
+# Context 上下文
+
+作用:   解决层级较深的间接父子组件之间的数据传递问题，以避免繁琐的props传递
+
+使用步骤：
+
+    ```
+    1、创建上下文
+    import React from 'react'
+
+    2、创建一个 theme Context,
+    export const {Provider,Consumer} = React.createContext("默认名称");
+    或者 export default const Ctx = React.createContext({});
+
+    3、在App组件中
+    import { Provider,Consumer } from '@/utils/Ctx.js'
+    或者 import Ctx from '@/utils/Ctx.js'
+
+    4、在App组件中
+    return( 
+        <Provider value={传值}>
+            <子组件></子组件>
+        </Provider>
+    )
+
+    或者 return( 
+        <Ctx.Provider value={传值}>
+            <子组件></子组件>   
+        </Ctx.Provider>
+    )
+
+    5、在子组件中
+    import { Consumer } from '../App.js'
+    return(
+        <Consumer>
+            {(value)=>(
+                <div>{value}</div>
+            )}
+        </Consumer>
+    )
+
+    或者
+    Child3.contextType = Ctx
+    <div style={{color: this.context.color, background: this.context.background }}>
+    <h3>我的子组件</h3>
+    </div>
+    ```
+
+# 高阶组件
+   高阶组件 :实际上是一个纯函数，该函数的入参是一个组件
+   什么是纯函数？唯一的入参，得到唯一的返回值
+   高阶组件的作用：把组件中可以复用的业务逻辑抽离出来，便于复用和维护
+
+   高阶组件，也叫高阶函数，还叫容器组件
+   被修饰的这个入参组件，被称作是 UI组件
+
