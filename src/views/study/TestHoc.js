@@ -1,5 +1,5 @@
 import React from 'react'
-import hoc from '../utils/hoc'
+import hoc from '../../utils/hoc'
 
 class TestHoc extends React.Component{
     constructor(props){

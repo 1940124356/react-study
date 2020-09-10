@@ -219,10 +219,42 @@
     ```
 
 # 高阶组件
-   高阶组件 :实际上是一个纯函数，该函数的入参是一个组件
-   什么是纯函数？唯一的入参，得到唯一的返回值
-   高阶组件的作用：把组件中可以复用的业务逻辑抽离出来，便于复用和维护
+    高阶组件 :实际上是一个纯函数，该函数的入参是一个组件
+    什么是纯函数？唯一的入参，得到唯一的返回值
+    高阶组件的作用：把组件中可以复用的业务逻辑抽离出来，便于复用和维护
 
-   高阶组件，也叫高阶函数，还叫容器组件
-   被修饰的这个入参组件，被称作是 UI组件
+    高阶组件，也叫高阶函数，还叫容器组件
+    被修饰的这个入参组件，被称作是 UI组件
+
+# Hook
+    hook实际上就是一套API
+
+    1、useState
+        ```
+        import { useState } from 'react'
+        let [msg,setMsg] = useState('')
+        //msg是声明式变量
+        setMsg()是函数,相当于 this.setState({msg}) 用于改变msg
+        useState('') 设置声明式变量的初始值
+        ```
+    2、useEffect
+        作用:让函数式组件拥有生命周期的特性。相当于以下三个生命周期的结合。
+            componentDidMount       mounted(vue)            是useEffect第一个函数参数中的语句代码    
+            componentDidUpdate      updated(vue)            是useEffect的第二个数组参数    
+            componentWillUnmount    beforeDestroyed(vue)    是useEffect第一个函数参数中的return语句   
+
+    3、useRef
+    4、useContext
+
+    作用：让函数式组件(无状态组件)拥有状态、生命周期、上下文等特性
+
+# React-router(路由)
+    npm install react-router-dom -S
+    组件化，react-router-dom提供大量的组件
+    HashRouter  BrowserRouter
+    Route 视图容器
+    link    NavLink 相当于是超链接
+    Redirect    用于实现重定向
+    Switch  用于包裹所有的Router
+    
 

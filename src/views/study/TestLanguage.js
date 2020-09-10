@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Child2 } from '../components/index'
+import { Child2 } from '../../components/index'
 
 export default class TestLanguage extends React.Component{
     constructor(props){

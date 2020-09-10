@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Consumer } from "../App";//引入父组件的Consumer容器
-import { Child3 } from '../components/' 
+import { Consumer } from "../../App";//引入父组件的Consumer容器
+import { Child3 } from '../../components/' 
 
 export default class TestContext extends React.Component{
     constructor(props){

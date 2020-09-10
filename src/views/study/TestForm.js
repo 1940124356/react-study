@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Checkbox,Radio } from '../components/'
+import { Checkbox,Radio } from '../../components/'
 
 export default class TestForm extends React.Component{
     constructor(props){

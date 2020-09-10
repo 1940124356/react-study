@@ -1,0 +1,36 @@
+.lo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.lo .kb-aside {
+  position: absolute;
+  top: 0;
+  width: 170px;
+  bottom: 0;
+  left: 0;
+}
+
+.lo .kb-aside .lo-link-row {
+  line-height: 40px;
+}
+
+.lo .kb-aside .lo-link-row > a {
+  text-decoration: none;
+  color: black;
+}
+
+.lo .kb-aside .lo-link-row .on {
+  color: red;
+}
+
+.lo .kb-main {
+  position: absolute;
+  top: 0;
+  left: 170px;
+  right: 0;
+  bottom: 0;
+}

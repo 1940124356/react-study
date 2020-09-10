@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Lift1,Lift2 } from '../components/' 
+import { Lift1,Lift2 } from '../../components/' 
 export default class TestLift extends React.Component{
     constructor(props){
         super(props)

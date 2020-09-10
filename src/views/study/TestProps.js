@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Child1 } from '../components/index'
+import { Child1 } from '../../components/index'
 
 export default class TestProps extends React.Component{
     //子类构造器

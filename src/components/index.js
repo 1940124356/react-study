@@ -7,6 +7,9 @@ import Lift1 from './Lift/Lift1'
 import Lift2 from './Lift/Lift2'
 import Modal from './study/Modal'
 
+
+import Layout from './layout/kbIndex'
+
 export {
     Child1,
     Child2,
@@ -15,5 +18,6 @@ export {
     Radio,
     Lift1,
     Lift2,
-    Modal
+    Modal,
+    Layout
 }
