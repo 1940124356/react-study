@@ -58,6 +58,19 @@
     props是只读的，不能改
     props不能赋值给state，props和state没有必然关系
 
+# 生命周期
+    React生命周期主要分为3个阶段
+    一、挂载阶段
+            constructor(){}             构造器
+            componentDidMount(){}       挂载完成
+            render(){}                  组件初始化(视图渲染)
+    二、更新阶段
+            shouldComponentUpdate(){}   
+            componentDidUpdate(){}      更新时触发
+            render(){}                  组件初始化(视图渲染)
+    三、销毁阶段
+            componentWillUnmount(){}    销毁时触发
+            render(){}                  组件初始化(视图渲染)
 
 # 事件绑定
 ### 事件绑定的三种方式
@@ -251,10 +264,191 @@
 # React-router(路由)
     npm install react-router-dom -S
     组件化，react-router-dom提供大量的组件
-    HashRouter  BrowserRouter
+    HashRouter(哈希路由)  BrowserRouter(history路由)
     Route 视图容器
     link    NavLink 相当于是超链接
     Redirect    用于实现重定向
-    Switch  用于包裹所有的Router
+    Switch  用于包裹所有的Router(Switch必须是Route直接父组件,中间不能任何其它组件间隔)
+    exact   精准匹配(写在Route里)
+
+    this.props.history.push()   / replace()     / go()      /goBack()
+    this.props.match.params     动态路由取参
+
+    哪些未被Route进行直接包裹的组件中，是没有this.props.history等API的。
+    要也想拥有这些API怎么办？
+    ```
+    import { withRouter } from 'react-router-dom'
     
+    class xxx extends React.Component{}
+
+    export default withRouter(xxx) 
+    ```
+    
+# 代码分割(拆分)
+    ```
+    1、安装loadable
+        npm install @loadable/component -S
+        import loadable from '@/loadable/component'
+        const OtherComponent = loadable(() => import('./OtherComponent'))
+        
+        function MyComponent() {
+            return (
+                <div>
+                <OtherComponent />
+                </div>
+            )
+        }
+    2、安装动态import的插件
+        npm install @babel/plugin-syntax-dynamic-import -D
+        //配置.babelrc.json
+        {
+            "plugins": ["@babel/plugin-syntax-dynamic-import"]
+        }
+
+    3、还需要添加一个Babel-EsLint的一个解析个工具
+        npm install babel-eslint -D
+        //配置.eslintrc
+        {
+            "parser": "babel-eslint",
+        }
+    ```
+# antd的使用
+    npm install antd -S
+    ```
+    import 'antd/dist/antd.css'
+    ```
+
+
+# mobx
+    1、npm install mobx -S
+
+    2、创建store
+    新建store/modules目录、 store/index. js 
+    ```
+
+    import CountStore from './modules/CountStore'
+    class Store{
+        //类的构造器
+        constructor(){
+            // 实例化
+            this.CountStore = new CountStore()
+        }
+    }
+    export default new Store()
+    ```
+
+
+    3、创建store/modules/ChildStore.js
+    ```
+    import { observable } from 'mobx'
+    export default class CountStore {
+        @observable count = 500
+    }
+
+
+    ```
+    4、在App.js中
+    import { Provider } from 'mobx-react'
+    import store from './store/'
+    return(
+        <Provider store={store}></Provider>
+    )
+    
+
+    5、安装babel插件来支持ES6修饰语法
+    npm install @babel/plugin-proposal-decorators -D
+    npm install @babel/plugin-proposal-class-properties -D
+    在package.json里面的"babel":{}配置
+    ```
+        "babel": {
+            "plugins":[
+                ["@babel/plugin-proposal-decorators",{"legacy":true}],
+                ["@babel/plugin-proposal-class-properties",{"loose":true}]
+            ],
+            "presets": [
+                "react-app"
+            ]
+        }
+    ```
+
+
+    6、在页面组件中使用store数据(在props里)
+    ```
+    //使用状态管理中的数据
+    import { inject,observer } from 'mobx-react'
+
+    // inject 注入，作用是吧某一个或多个store中的数据注入到组件中去
+    // observer 观察者，当被观察的被共享的store数据发生变化，本组件自动更新
+
+    @inject('store')
+    @observer
+    class Good extends React.Component{}
+
+    export default Good
+    ```
+
+
+    7、如何操作store(数据更新)？
+    ```
+    //store/modules/ChildStore.js
+    import { observable, action, autorun ,computed } from 'mobx'
+    //  observable    用于定义可共享的数据
+    //  action        用于修改方法，不区分mutations和actions
+    //  autorun       用于初始化的代码、业务逻辑
+    //  computed      用于计算属性
+    class ChildStore {
+        @observable msg = ''
+        @action changMsg(payload){
+            this.msg = payload
+        }
+    }
+    export default ChildStore 
+    ```
+    然后在页面中就可以使用 this.props.store.ChildStore.changeMsg()  来操作Store
+
+# React脚手架
+    ```
+    //全局安装脚手架
+    npm install create-react-app -g
+
+    //创建项目
+    create-react-app '项目名字'
+    cd '项目名字'
+
+    npm start   //启动项目
+    npm run build   //打包上线
+
+    注意：暴露文件的做法
+    git init
+    git add *
+    git commit -m "first"
+    npm run eject   //把隐藏文件都暴露出来
+
+    npm start   //启动项目
+    ```
+
+# 环境配置
+
+    1、自定义端口号 /scripts/start.js 搜索PORT 
+
+    2、配置 @ 别名 /config/webpack.config.js 里找到resolve.alias
+    
+    3、favicon制作 找免费在线制作网站，下载32*32的尺寸。
+    
+    4、sass安装 只用安装 node-sass 这个包即可。
+    
+    5、本地环境怎么配置代码
+    
+    安装 cnpm install http-proxy-middleware -D 新建代理文件 src/setupProxy.js
+    ```
+    const { createProxyMiddleware } = require('http-proxy-middleware');
+    module.exports = function(app) {
+        app.use(
+            '/api',
+            createProxyMiddleware({
+            target:'http://xxx.com',    //目标服务器
+            changeOrigin: true
+        })
+    )};
+    ```
 
